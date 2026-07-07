@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCampus - Dashboard Universitario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {} }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 border-r border-slate-700 bg-slate-800 flex flex-col transition-all duration-300">
+        <div class="p-6 flex items-center justify-between">
+            <h1 class="font-bold text-xl tracking-tight">EduCampus</h1>
+        </div>
+        <nav class="flex-1 px-4 space-y-2 mt-4">
+            <button onclick="showView('Dashboard')" class="w-full flex items-center p-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition">
+                <span class="ml-2 font-medium">Dashboard</span>
+            </button>
+            <button onclick="showView('Perfil')" class="w-full flex items-center p-3 rounded-xl hover:bg-slate-700 transition">
+                <span class="ml-2 font-medium">Perfil</span>
+            </button>
+            <button onclick="showView('Academico')" class="w-full flex items-center p-3 rounded-xl hover:bg-slate-700 transition">
+                <span class="ml-2 font-medium">Académico</span>
+            </button>
+            <button onclick="showView('Biblioteca')" class="w-full flex items-center p-3 rounded-xl hover:bg-slate-700 transition">
+                <span class="ml-2 font-medium">Biblioteca</span>
+            </button>
+            <button onclick="showView('IA')" class="w-full flex items-center p-3 rounded-xl hover:bg-slate-700 transition">
+                <span class="ml-2 font-medium">Centro IA</span>
+            </button>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col">
+        <header class="h-16 border-b border-slate-700 bg-slate-800 flex items-center justify-between px-8">
+            <h2 id="view-title" class="font-semibold text-lg">Dashboard</h2>
+        </header>
+
+        <div id="content" class="p-8 overflow-y-auto">
+            <!-- Content will be injected here -->
+        </div>
+    </main>
+
+    <script>
+        const views = {
+            Dashboard: `
+                <div class="space-y-6">
+                    <div class="p-8 rounded-3xl bg-blue-600">
+                        <h2 class="text-3xl font-bold">Bienvenido, Estudiante</h2>
+                        <p class="opacity-90">Ingeniería de Sistemas | 5to Semestre</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700"><h3 class="font-bold mb-2">Tareas</h3><p>3 entregas esta semana</p></div>
+                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700"><h3 class="font-bold mb-2">Racha</h3><p>12 días consecutivos</p></div>
+                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700"><h3 class="font-bold mb-2">Acceso</h3><p>Abrir última clase</p></div>
+                    </div>
+                </div>`,
+            Perfil: `
+                <div class="bg-slate-800 p-8 rounded-2xl max-w-2xl border border-slate-700">
+                    <h3 class="text-2xl font-bold mb-6">Perfil Maestro (Fase 2)</h3>
+                    <div class="space-y-4">
+                        <input type="text" value="Estudiante Universitario" class="w-full p-3 bg-slate-700 rounded-lg outline-none border border-slate-600" />
+                        <input type="text" value="Universidad Central" class="w-full p-3 bg-slate-700 rounded-lg outline-none border border-slate-600" />
+                        <button class="bg-blue-600 px-6 py-2 rounded-lg font-bold hover:bg-blue-700 transition">Guardar Cambios</button>
+                    </div>
+                </div>`,
+            Academico: `
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold mb-6">Materias del Semestre</h3>
+                    <div class="bg-slate-800 p-6 rounded-2xl flex justify-between items-center border border-slate-700">
+                        <span class="font-semibold">Cálculo II</span>
+                        <div class="flex gap-2">
+                            <span class="bg-slate-700 px-3 py-1 rounded text-xs">Programa</span>
+                            <span class="bg-slate-700 px-3 py-1 rounded text-xs">Asistencia</span>
+                        </div>
+                    </div>
+                </div>`,
+            Biblioteca: `
+                <div class="space-y-6">
+                    <input type="text" placeholder="Buscar archivos..." class="w-full p-3 bg-slate-800 rounded-xl outline-none border border-slate-700" />
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="bg-slate-800 p-4 rounded-xl text-center border border-slate-700 hover:border-blue-500 cursor-pointer">PDFs</div>
+                        <div class="bg-slate-800 p-4 rounded-xl text-center border border-slate-700 hover:border-blue-500 cursor-pointer">Artículos</div>
+                    </div>
+                </div>`,
+            IA: `
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold">Centro de Inteligencia Artificial</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                            <h4 class="font-bold mb-2">Prompts de Escritura</h4>
+                            <button class="w-full border border-blue-500 p-2 rounded-lg hover:bg-blue-900 transition">Ver Biblioteca</button>
+                        </div>
+                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                            <h4 class="font-bold mb-2">Resumidor</h4>
+                            <button class="w-full bg-blue-600 p-2 rounded-lg hover:bg-blue-700 transition">Cargar Archivo</button>
+                        </div>
+                    </div>
+                </div>`
+        };
+
+        function showView(viewName) {
+            document.getElementById('content').innerHTML = views[viewName];
+            document.getElementById('view-title').innerText = viewName;
+        }
+
+        // Inicializar
+        showView('Dashboard');
+    </script>
+</body>
+</html>
